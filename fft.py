@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import matplotlib.pyplot as plt
-from scipy.fft import fft
+from scipy.fft import fft as scipy_fft
 from parallel_fft import MyParallelFFT
 
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         start = time.time()
         sig = my_fft.create_signal(size)
         sig_fourier = my_fft.run_fft(sig)
-        sig_scipy = fft(sig)
+        sig_scipy = scipy_fft(sig)
         finish = time.time() - start
         seq_times.append(finish)
         print(f'Сигнал: {i + 1}, проверка: {np.allclose(sig_scipy, sig_fourier)}, '
@@ -63,7 +63,7 @@ if __name__ == '__main__':
         start = time.time()
         sig = parallel_fft.create_signal(size)
         sig_fourier = parallel_fft.run_fft(sig)
-        sig_scipy = fft(sig)
+        sig_scipy = scipy_fft(sig)
         finish = time.time() - start
         parallel_times.append(finish)
         print(f'Сигнал: {i + 1}, проверка: {np.allclose(sig_scipy, sig_fourier)}, '

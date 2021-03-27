@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import multiprocessing as mp
-from scipy.fft import fft
+from scipy.fft import fft as scipy_fft
 
 
 class MyParallelFFT:
@@ -58,6 +58,6 @@ if __name__ == '__main__':
         start = time.time()
         sig = my_fft.create_signal(size)
         sig_fourier = my_fft.run_fft(sig)
-        sig_scipy = fft(sig)
+        sig_scipy = scipy_fft(sig)
         print(f'Сигнал: {i+1}, проверка: {np.allclose(sig_scipy, sig_fourier)}, '
               f'время: {time.time() - start}')
